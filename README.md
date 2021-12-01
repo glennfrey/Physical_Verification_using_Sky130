@@ -22,9 +22,9 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
       - PV_D1SK2_L5 - Importing Schematic To Layout And Inverter Layout Steps
       - PV_D1SK2_L6 - Final DRC/LVS Checks And Post Layout Simulations
 
-![](vsdpvday1/magic.jpeg)
-![](vsdpvday1/ngspice.jpeg)
-![](vsdpvday1/netgen.jpeg)
-![](vsdpvday1/xschem.jpeg)
-![](vsdpvday1/inverter_xschem.jpeg)
-![](vsdpvday1/inverter_magic_trial.jpeg)
+![](vsdpvday1/magic.png)
+![](vsdpvday1/ngspice.png)
+![](vsdpvday1/netgen.png)
+![](vsdpvday1/xschem.png)
+![](vsdpvday1/inverter_xschem.png)
+![](vsdpvday1/inverter_magic_trial.png)
