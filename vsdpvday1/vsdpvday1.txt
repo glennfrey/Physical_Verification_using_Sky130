@@ -1,0 +1,10 @@
+no console command
+magic -noconsole
+netgen -noconsole
+magic -dnull -noconsole  = no gui
+magic -dnull -noconsole test.tcl = run .tcl
+netgen -batch source test.tcl
+xschem --tcl test.tcl -q
+ngspice -b
+
+ngsp
