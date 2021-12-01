@@ -21,11 +21,10 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
       - PV_D1SK2_L4 - Creating Symbol And Exporting Schematic In Xschem
       - PV_D1SK2_L5 - Importing Schematic To Layout And Inverter Layout Steps
       - PV_D1SK2_L6 - Final DRC/LVS Checks And Post Layout Simulations
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
-![](Workshop-Flyer.jpeg)
+
+![](vsdpvday1/magic.jpeg)
+![](vsdpvday1/ngspice.jpeg)
+![](vsdpvday1/netgen.jpeg)
+![](vsdpvday1/xschem.jpeg)
+![](vsdpvday1/inverter_xschem.jpeg)
+![](vsdpvday1/inverter_magic_trial.jpeg)
