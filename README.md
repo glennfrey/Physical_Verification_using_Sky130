@@ -115,3 +115,29 @@ always use the layout netlist first then the schematic second so that you always
 ![](vsdpvday1/magic_inverter_spiceparasitics.png)
 - this adds parasitic capacitance in the spice file
 to view type vi inverter.spice
+### Day 2
+![](vsdpvday2cifcommands.png)
+![](vsdpvday2/gds_read.png)
+![](vsdpvday2/cellmanager.png)
+![](vsdpvday2/load_andlayout.png)
+![](vsdpvday2/gds_noduplicates.png)
+![](vsdpvday2/port _index.png)
+![](vsdpvday2/port _index2.png)
+![](vsdpvday2/spicefile.png)
+![](vsdpvday2/vi_sky130_fd_sd_hd.png)
+![](vsdpvday2/lab2vid3lef.png)
+![](vsdpvday2/lab2vid3afterread2spice_lef_annotation.png)
+![](vsdpvday2/lab2vid3test.png)
+![](vsdpvday2/lab2vid3testcomparermagesult.png)
+![](vsdpvday2/lab2vid3testcomparermagesult2.png)
+![](vsdpvday2/lab2vid4extract.png)
+![](vsdpvday2/lab2vid4comparison.png)
+![](vsdpvday2/lab2vid5inverterparasitics.png)
+![](vsdpvday2/lab2vid5inverterparasiticsinscpie.png)
+![](vsdpvday2/lab2vid5inverter_inscpie.png)
+![](vsdpvday2/lab2vid5inverter_extresist.png)
+![](vsdpvday2/xor.png)
+![](vsdpvday2/xorresultc.png)
+![](vsdpvday2/lvs.png)
+
+
