@@ -137,7 +137,7 @@ to view type vi inverter.spice
 ![](vsdpvday2/lab2vid5inverter_inscpie.png)
 ![](vsdpvday2/lab2vid5inverter_extresist.png)
 ![](vsdpvday2/xor.png)
-![](vsdpvday2/xorresultc.png)
+![](vsdpvday2/xorresult.png)
 ![](vsdpvday2/lvs.png)
 
 
