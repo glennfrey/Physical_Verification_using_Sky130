@@ -1,0 +1,79 @@
+lab1
+
+cp /usr/share/pdk/sky130A/libs.tech/magic/sky130A.magicrc ./.magicrc
+
+cif listall istyle
+cif list istyle
+cif  istyle xxx
+
+gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+
+cell nametop 
+
+menu option cell manager
+select sky130_fd_sc_hd_and2_1
+
+notice the label are draw as yellow that marks them as regular text. which means they are not mark as pins at the subcell
+but standards cell should definitely have pins the reason they didn't show up as pins because the wrong input style are being use.
+
+cif istyle sky130(vendor)
+gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+
+overwrote layout text turns blue
+the policy is if the cell is read from the gds with the same name as existing cell. the existing cell is cleared out and the new one is read in. but note what change in the cell, the labels turn from yellow to navy blue indicating that this labels represents ports. so that's the difference between the two style and why you should use the vendor stle when reading the vendor files.
+
+cif istyle sky130()
+if you dont want to overwrite gds from the cell you can type command in the tkcon window 
+gds noduplicates
+gds noduplicates true
+
+lab2 
+you can only ask 1 label at a time and sometimes it can be impossible to select one label
+port index  command tells the index of the port
+you cannot select 2 ports and run port index this is true in other commands
+
+everything that are listed here said default
+do you remember i said in the lecture that one reason that gds is bad  is that it doesnt have a way to preserve most metadata. well specifying a pin class or pin use is exactly metadata
+
+because of that somebody came up with a new file format called lef that does just that
+
+but one of the magic main function is to extract file and produce netlist. you cant write a subcircuit without assigning suborder to the pin/ becanuse the pin order is meaningful in spice. so magic gives everypin an arbitrary order but this file is from the vendor library
+
+underlying problem
+the vendor library has a definition of a subcircuit for any standard cell and that definition has a known port order and that order must be considered the correct port order cause its the file that came frome the vendor. we cant change the port. but the port numbering is a metadata so it is not in the gds file.
+indeed what you just saw in the output in magic was that the first port index was 1 and the name of the port 1 vpwr. but in the vendor spice file the first port in the subckt definition of the and2_1 gate is A. so whatever magic in the port order is wrong because that metadata just doesn't exist in the gds file.
+
+There is a way to assert a port order in the gds file simply by writing the labels in the correct order and reading them back that way. Magic will preserve port order when it writes out and read back gds but it is not useful as it may seem. So the big question is how do you read in a layout of the cell and get all the metadata along with it? well i did say that the metadata was captured by the in other files. really anything you need to know about layout is captured in the gds file, the lef file, and the spice netlist. magic has a way to capture the metadata which is to anotate the data from lef and spice file. to do it, first magic has a lef read command. lef command is use to read the abstract view of the cell. but magic has a policy that if you read a lef macro of the cell that already exist in memory then instead of erasing the cell and replacing it with the abstract view it will anotate the cell with all the metadata in the lef macro.
+lef read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
+this file contains all of the macro for the whole standard cell set. It doesnt matter if you are editing a cell or not. If the lef file has a macro matching a cell in the database that cell gets annotated. so lets repeat some of the commands we did earlier
+the name of the first order is still power that is because port order is not metadata that is captured in eithe gds and lef. you only find it in the spice netlist or cdl.
+after reading the lef file and typing same commands for metadata. each port now has a valid use and class that provides extra information about it. so what about that port order? we use tcl script call readspice you can run it in a magic command line
+readspice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+after running the script notice the port 1 name is no longer vpwr. it is now A which matches the subcircuit in the spice file we were looking at. so the port anotation was successful
+
+abstract view has something to do with reading a lef file
+
+lab3
+port 3 is x which does not match the spice netlist because
+port order is not part of lef file meta data magic just assign port as it read the lef file
+
+it seems that the port order can be solve by readspice command
+
+lab3 challenge
+
+cif istyle sky130(vendor)
+gds readonly true
+gds rescale false
+gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds
+lef read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
+readspice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+then save to save mag file
+then compare by
+vi /usr//share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__and2_1.mag
+
+
+lab2 vid 4 assignment
+compare spice generated from layout and spice from library
+diff -y sky130_fd_sc_hd__and2_1.spice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
+
