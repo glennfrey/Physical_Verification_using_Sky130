@@ -133,6 +133,10 @@ to view type vi inverter.spice
 .subckt inverter in vdd vss
 XXM1 vdd XM1/a_n78_n150# in in vss XM1/a_114_n150# vdd in sky130_fd_pr__nfet_01v8_RV7F6E
 XXM2 vss in vdd vdd in vdd in vdd vdd sky130_fd_pr__pfet_01v8_6LLYWG
+
+lab assignment transient response of and or inverter 1 for lvs 2 for with c parasitic 3 for all
+lab lvs AND and AND standard cell sky130
+last lab xor comparoson
 C0 in XM1/a_114_n150# 0.00fF
 C1 vdd in 1.79fF
 C2 vdd XM1/a_n78_n150# 2.14fF
@@ -152,6 +156,7 @@ cp ../xschem/inverter_tb.spice
 *.opin in
 *.opin out
 x1 net1 in out GND inverter
+
 V1 in GND PWL(0 0 20n 0 900n 1.8)
 V2 net1 GND 1.8
 
