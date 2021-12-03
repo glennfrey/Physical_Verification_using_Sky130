@@ -7,21 +7,21 @@ The Workshop is a 5-day basic to advance program that is design for fresher who 
 Co-founder of VLSI System Design (VSD) Corporation Private Limited
 ### AGENDA
   - ##### Day 1 - Introduction to SkyWater SKY130
-    - PV_D1SK1 - Introduction to SkyWater PDKs and opensource EDA tools
-      - PV_D1SK1_L1 - Introduction to Skywater PDK
-      - PV_D1SK1_L2 - Opensource EDA Tools
-      - PV_D1SK1_L3 - Understanding Skywater PDK - Layers
-      - PV_D1SK1_L4 - Understanding Skywater PDK - Devices
-      - PV_D1SK1_L5 - Understanding Skywater PDK Libraries
-      - PV_D1SK1_L6 - Opensource Tools And Flows
-    - PV_D1SK2 - Tool installations and basic DRC/LVS design flow
-      - PV_D1SK2_L1 - Check Tool Installations
-      - PV_D1SK2_L2 - Creating Sky130 Device Layout In Magic
-      - PV_D1SK2_L3 - Creating Simple Schematic In Xschem
-      - PV_D1SK2_L4 - Creating Symbol And Exporting Schematic In Xschem
-      - PV_D1SK2_L5 - Importing Schematic To Layout And Inverter Layout Steps
-      - PV_D1SK2_L6 - Final DRC/LVS Checks And Post Layout Simulations
-
+    - Introduction to SkyWater PDKs and opensource EDA tools
+      - Introduction to Skywater PDK
+      - Opensource EDA Tools
+      - Understanding Skywater PDK - Layers
+      - Understanding Skywater PDK - Devices
+      - Understanding Skywater PDK Libraries
+      - Opensource Tools And Flows
+    - Tool installations and basic DRC/LVS design flow
+      - Check Tool Installations
+      - Creating Sky130 Device Layout In Magic
+      - Creating Simple Schematic In Xschem
+      - Creating Symbol And Exporting Schematic In Xschem
+      - Importing Schematic To Layout And Inverter Layout Steps
+      - Final DRC/LVS Checks And Post Layout Simulations
+### Day 1
 ![](vsdpvday1/magic.png)
 ![](vsdpvday1/ngspice.png)
 ![](vsdpvday1/netgen.png)
