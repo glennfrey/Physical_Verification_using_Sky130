@@ -139,5 +139,17 @@ to view type vi inverter.spice
 ![](vsdpvday2/xor.png)
 ![](vsdpvday2/xorresult.png)
 ![](vsdpvday2/lvs.png)
-
-
+### Day 3
+![](vsdpvday3/lab3ex1a.png)
+![](vsdpvday3/lab3ex1b.png)
+![](vsdpvday3/lab3ex1c.png)
+![](vsdpvday3/lab3ex1d.png)
+![](vsdpvday3/lab3ex2.png)
+![](vsdpvday3/lab3ex2a.png)
+![](vsdpvday3/lab3ex2b.png)
+![](vsdpvday3/lab3ex2c.png)
+![](vsdpvday3/lab3ex2d.png)
+![](vsdpvday3/lab3ex3a.png)
+![](vsdpvday3/lab3ex3b.png)
+![](vsdpvday3/lab3ex4.png)
+![](vsdpvday3/lab3ex4a.png)
