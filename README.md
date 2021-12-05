@@ -140,16 +140,67 @@ to view type vi inverter.spice
 ![](vsdpvday2/xorresult.png)
 ![](vsdpvday2/lvs.png)
 ### Day 3
+##### PV_D3SK2_L1 - Lab For Width Rule And Spacing Rule
 ![](vsdpvday3/lab3ex1a.png)
 ![](vsdpvday3/lab3ex1b.png)
 ![](vsdpvday3/lab3ex1c.png)
 ![](vsdpvday3/lab3ex1d.png)
+##### Lab 2 For Wide Spacing Rule And Notch Rule
 ![](vsdpvday3/lab3ex2.png)
 ![](vsdpvday3/lab3ex2a.png)
 ![](vsdpvday3/lab3ex2b.png)
 ![](vsdpvday3/lab3ex2c.png)
 ![](vsdpvday3/lab3ex2d.png)
+##### Lab 3 For Via Size, Multiple Vias, Via Overlap and Autogenerate Vias
+![](vsdpvday3/lab3ex3.png)
 ![](vsdpvday3/lab3ex3a.png)
 ![](vsdpvday3/lab3ex3b.png)
+##### Lab 4 For Minumum Area Rule And Minimum Hole Rule
 ![](vsdpvday3/lab3ex4.png)
 ![](vsdpvday3/lab3ex4a.png)
+![](vsdpvday3/lab3ex4c.png)
+##### Lab 5 For Wells And Deep N-Well
+![](vsdpvday3/lab3ex5.png)
+![](vsdpvday3/lab3ex5a.png)
+![](vsdpvday3/lab3ex5b.png)
+![](vsdpvday3/lab3ex5c.png)
+##### Lab 6 For Derived Layers
+![](vsdpvday3/lab3ex6.png)
+![](vsdpvday3/lab3ex6a.png)
+![](vsdpvday3/lab3ex6a2.png)
+![](vsdpvday3/lab3ex6b.png)
+![](vsdpvday3/lab3ex6c.png)
+##### Lab 7 For Paramterized And PDK Devices
+![](vsdpvday3/lab3ex7.png)
+![](vsdpvday3/lab3ex7a.png)
+![](vsdpvday3/lab3ex7b.png)
+![](vsdpvday3/lab3ex7c.png)
+![](vsdpvday3/lab3ex7e.png)
+![](vsdpvday3/lab3ex7e2.png)
+##### Lab 8 For Angle Error And Overlap Rule
+![](vsdpvday3/lab3ex8.png)
+![](vsdpvday3/lab3ex8a.png)
+![](vsdpvday3/lab3ex8a1.png)
+![](vsdpvday3/lab3ex8a2.png)
+![](vsdpvday3/lab3ex8b.png)
+![](vsdpvday3/lab3ex8b1.png)
+##### Lab 9 For Unimplemented Rules
+![](vsdpvday3/lab3ex9.png)
+![](vsdpvday3/lab3ex9a.png)
+##### Lab 10 Latch-up And Antenna Rules
+![](vsdpvday3/lab3ex10.png)
+![](vsdpvday3/lab3ex10a.png)
+![](vsdpvday3/lab3ex10a1.png)
+![](vsdpvday3/lab3ex10a2.png)
+##### Lab 11 For Density Rules
+![](vsdpvday3/lab3ex11.png)
+![](vsdpvday3/lab3ex11a.png)
+![](vsdpvday3/lab3ex11a1.png)
+![](vsdpvday3/lab3ex11a2.png)
+![](vsdpvday3/lab3ex11metal1.png)
+![](vsdpvday3/lab3ex11metal2.png)
+![](vsdpvday3/lab3ex11metal1final.png)
+##### Lab 12 Final Exercise
+![](vsdpvday3/lab3ex12.png)
+![](vsdpvday3/lab3ex12a.png)
+
