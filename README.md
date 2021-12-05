@@ -197,9 +197,9 @@ to view type vi inverter.spice
 ![](vsdpvday3/lab3ex11a.png)
 ![](vsdpvday3/lab3ex11a1.png)
 ![](vsdpvday3/lab3ex11a2.png)
-![](vsdpvday3/lab3ex11metal1.png)
-![](vsdpvday3/lab3ex11metal2.png)
-![](vsdpvday3/lab3ex11metal1final.png)
+![](vsdpvday3/lab3ex11ametal1.png)
+![](vsdpvday3/lab3ex11ametal2.png)
+![](vsdpvday3/lab3ex11ametal1final.png)
 ##### Lab 12 Final Exercise
 ![](vsdpvday3/lab3ex12.png)
 ![](vsdpvday3/lab3ex12a.png)
