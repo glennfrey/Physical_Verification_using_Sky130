@@ -245,30 +245,4 @@ to view type vi inverter.spice
 ![](vsdpvday5/lab5ex5j.png)
 ![](vsdpvday5/lab5ex5k.png)
 ##### Lab 5 LVS For Small Analog Block - Power-On Reset - Part 2
-![](vsdpvday3/lab3ex5.png)
-![](vsdpvday3/lab3ex5a.png)
-![](vsdpvday3/lab3ex5b.png)
-![](vsdpvday3/lab3ex5c.png)
-##### Lab 6 For Derived Layers
-![](vsdpvday3/lab3ex6.png)
-![](vsdpvday3/lab3ex6a.png)
-![](vsdpvday3/lab3ex6a2.png)
-![](vsdpvday3/lab3ex6b.png)
-![](vsdpvday3/lab3ex6c.png)
-##### Lab 7 For Paramterized And PDK Devices
-![](vsdpvday3/lab3ex7.png)
-![](vsdpvday3/lab3ex7a.png)
-![](vsdpvday3/lab3ex7b.png)
-![](vsdpvday3/lab3ex7c.png)
-![](vsdpvday3/lab3ex7e.png)
-![](vsdpvday3/lab3ex7e2.png)
-##### Lab 8 For Angle Error And Overlap Rule
-![](vsdpvday3/lab3ex8.png)
-![](vsdpvday3/lab3ex8a.png)
-![](vsdpvday3/lab3ex8a1.png)
-![](vsdpvday3/lab3ex8a2.png)
-![](vsdpvday3/lab3ex8b.png)
-![](vsdpvday3/lab3ex8b1.png)
-##### Lab 9 For Unimplemented Rules
-![](vsdpvday3/lab3ex9.png)
-![](vsdpvday3/lab3ex9a.png)
+
