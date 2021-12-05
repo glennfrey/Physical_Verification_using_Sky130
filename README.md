@@ -231,7 +231,7 @@ to view type vi inverter.spice
 ![](vsdpvday5/lab5ex3l.png)
 ##### Lab 4 LVS With SPICE Low Level Components
 ![](vsdpvday5/lab5ex4.png)
-##### Lab 5 LVS For Small Analog Block - Power-On Reset - Part 1
+##### Lab 5 LVS For Small Analog Block - Power-On Reset
 ![](vsdpvday5/lab5ex5.png)
 ![](vsdpvday5/lab5ex5a.png)
 ![](vsdpvday5/lab5ex5b.png)
@@ -244,5 +244,62 @@ to view type vi inverter.spice
 ![](vsdpvday5/lab5ex5i.png)
 ![](vsdpvday5/lab5ex5j.png)
 ![](vsdpvday5/lab5ex5k.png)
-##### Lab 5 LVS For Small Analog Block - Power-On Reset - Part 2
+![](vsdpvday5/lab5ex5l.png)
+![](vsdpvday5/lab5ex5m.png)
+![](vsdpvday5/lab5ex5n.png)
+![](vsdpvday5/lab5ex5o.png)
+![](vsdpvday5/lab5ex5p.png)
+![](vsdpvday5/lab5ex5q.png)
+![](vsdpvday5/lab5ex5r.png)
+![](vsdpvday5/lab5ex5s.png)
+![](vsdpvday5/lab5ex5st.png)
+![](vsdpvday5/lab5ex5u.png)
+![](vsdpvday5/lab5ex5v.png)
+![](vsdpvday5/lab5ex5w.png)
+![](vsdpvday5/lab5ex5y.png)
+##### Lab 6 LVS Layout Vs Verilog For Standard Cell
+![](vsdpvday5/lab5ex6.png)
+![](vsdpvday5/lab5ex6a.png)
+![](vsdpvday5/lab5ex6b.png)
+![](vsdpvday5/lab5ex6c.png)
+![](vsdpvday5/lab5ex6d.png)
+![](vsdpvday5/lab5ex6e.png)
+![](vsdpvday5/lab5ex6f.png)
+![](vsdpvday5/lab5ex6g.png)
+##### Lab 7 LVS For Macros
+![](vsdpvday5/lab5ex7.png)
+![](vsdpvday5/lab5ex7a.png)
+![](vsdpvday5/lab5ex7b.png)
+![](vsdpvday5/lab5ex7c.png)
+![](vsdpvday5/lab5ex7d.png)
+##### Lab 8 LVS Digital PLL
+![](vsdpvday5/lab5ex8.png)
+![](vsdpvday5/lab5ex8a.png)
+![](vsdpvday5/lab5ex8b.png)
+![](vsdpvday5/lab5ex8c.png)
+![](vsdpvday5/lab5ex8d.png)
+![](vsdpvday5/lab5ex8e.png)
+![](vsdpvday5/lab5ex8f.png)
+![](vsdpvday5/lab5ex8g.png)
+![](vsdpvday5/lab5ex8h.png)
+![](vsdpvday5/lab5ex8i.png)
+![](vsdpvday5/lab5ex8j.png)
+![](vsdpvday5/lab5ex8k.png)
+![](vsdpvday5/lab5ex8l.png)
+![](vsdpvday5/lab5ex8m.png)
+![](vsdpvday5/lab5ex8n.png)
+![](vsdpvday5/lab5ex8o.png)
+![](vsdpvday5/lab5ex8p.png)
+![](vsdpvday5/lab5ex8q.png)
+##### Lab 9 LVS With Property Errors
+![](vsdpvday5/lab5ex9.png)
+![](vsdpvday5/lab5ex9a.png)
+![](vsdpvday5/lab5ex9b.png)
+![](vsdpvday5/lab5ex9c.png)
+![](vsdpvday5/lab5ex9d.png)
+![](vsdpvday5/lab5ex9e.png)
+![](vsdpvday5/lab5ex9f.png)
+
+
+
 
