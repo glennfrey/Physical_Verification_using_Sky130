@@ -292,9 +292,40 @@ to view type vi inverter.spice
 ### Day 4
 ##### OpenLane/OpenRoad Automation
 ![](openlane.png)
+- OpenLane flow is an RTL2GDS tool that uses several tool from synthesis, floorplan, placement, clock tree synthesis, routing, GDS generation to checkng. Below are the process flow and corresponding tools.
+##### Synthesis
+##### Synthesis
+- yosys - Performs RTL synthesis
+- abc - Performs technology mapping
+- OpenSTA - Performs static timing analysis on the resulting netlist to generate timing reports
+##### Floorplan and PDN
+- init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
+- ioplacer - Places the macro input and output ports
+- pdn - Generates the power distribution network
+- tapcell - Inserts welltap and decap cells in the floorplan
+##### Placement
+- RePLace - Performs global placement
+- Resizer - Performs optional optimizations on the design
+- OpenDP - Perfroms detailed placement to legalize the globally placed components
+##### CTS
+- TritonCTS - Synthesizes the clock distribution network (the clock tree)
+##### Routing
+- FastRoute - Performs global routing to generate a guide file for the detailed router
+- CU-GR - Another option for performing global routing.
+- TritonRoute - Performs detailed routing
+- SPEF-Extractor - Performs SPEF extraction
+##### GDSII Generation
+- Magic - Streams out the final GDSII layout file from the routed def
+- Klayout - Streams out the final GDSII layout file from the routed def as a back-up
+- Checks
+- Magic - Performs DRC Checks & Antenna Checks
+- Klayout - Performs DRC Checks
+- Netgen - Performs LVS Checks
+- CVC - Performs Circuit Validity Checks
+##### OpenLane flow - non-interactive
 ![](vsdpvday4/day4pvlab.png)
 ![](vsdpvday4/day4pvlaba.png)
-##### OpenLane flow - non-interactive
+##### OpenLane flow - interactive
 ![](vsdpvday4/day4pvlab1.png)
 ![](vsdpvday4/day4pvlab1open_yosys.png)
 ![](vsdpvday4/day4pvlab1converts_verilog_logicgates.png)
