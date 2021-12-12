@@ -82,36 +82,43 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
       - Lab - Layout Vs. Verilog for Standard Cell
       - Lab - LVS with Macros
       - Lab - LVS for Digital PLL Design
+      
 ### Day 1
+
 ##### Check Tool Installations
-- In our first lab we learn to invoke the EDA tools primarily use in physical verification.
+
+In our first lab we learn to invoke the EDA tools primarily use in physical verification.
 ![](vsdpvday1/magic.png)
-- What you see here is the Magic EDA tool which is use for layout editing, streams out GDSII file, extracting .ext and .spice from layout, DRC checking and Antenna Checking. Magic has two window. The tkcon console where you can invoke your command and the magic layout environment. 
+What you see here is the Magic EDA tool which is use for layout editing, streams out GDSII file, extracting .ext and .spice from layout, DRC checking and Antenna Checking. Magic has two window. The tkcon console where you can invoke your command and the magic layout environment. 
 - other commands on magic
 * ```magic -noconsole``` - for no console command
 * ```magic -dnull -noconsole```  = no gui
 * ```magic -dnull -noconsole test.tcl``` = run .tcl
 ![](vsdpvday1/ngspice.png)
-- Ngspice is a mixed-level/mixed-signal electronic circuit simulator.
+Ngspice is a mixed-level/mixed-signal electronic circuit simulator.
 * ```ngspice -b```
 ![](vsdpvday1/netgen.png)
-- Netgen is a tool for comparing netlists, a process known as LVS, which stands for "Layout vs. Schematic".
+Netgen is a tool for comparing netlists, a process known as LVS, which stands for "Layout vs. Schematic".
 - other commands on netgen
 * ```netgen -noconsole``` - for no console command
 * ```netgen -batch source test.tcl```
 ![](vsdpvday1/xschem.png)
-- Xschem is a schematic capture program, it allows creation of hierarchical representation of circuits with a top down approach.
+Xschem is a schematic capture program, it allows creation of hierarchical representation of circuits with a top down approach.
 * ```xschem``` 
 ![](vsdpvday1/inverter_xschem.png)
-- Here I open the inverter schematic. 
+Here I open the inverter schematic. 
+
 ##### Creating Sky130 Device Layout In Magic
+
 ![](vsdpvday1/inverter_magic_trial.png)
-- Here we try to navigate how to do layout manipulation. I am using my left and right button of my mouse to create a rectangle and then the center of my mouse to fill up a layer
+Here we try to navigate how to do layout manipulation. I am using my left and right button of my mouse to create a rectangle and then the center of my mouse to fill up a layer
 ![](vsdpvday1/magic_inverter_nmos.png)
-- in magic go to devices 1 tab click pnp change width parameters to 2um, lenth 0.5, fingers 3
+In magic go to devices 1 tab click pnp change width parameters to 2um, lenth 0.5, fingers 3
 ![](vsdpvday1/magic_inverter_nmos_noguardring.png)
 - no guard, change device type
+
 ##### Creating Simple Schematic In Xschem
+
 ![](vsdpvday1/xschem_inverter.png)
 - for nfet note that in xschem w is fingers times width of device in this case 3 times 1.5 therefore 4.5
 - change L to .18
@@ -122,21 +129,20 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 - change l to .18
 - nf to 3
 ![](vsdpvday1/xschem_inverter_fetdetail.png)
--  after completing the schematic we need to implement a testbench that is separate to the schematic itself
--  the schematic  circuit will appear as a symbol in test bench schematic
+After completing the schematic we need to implement a testbench that is separate to the schematic itself. The schematic  circuit will appear as a symbol in test bench schematic
 -  go to symbol and click on make symbol from schematic then click ok to create a symbol for inverter circuit
 -  create a new schematic for the testbench 
 -  to insert the inverter symbol press insert in the keyboard go to the current directory select inverter.sym then press ok-
 ![](vsdpvday1/xschem_inverter_sch.png)
-- save the schematic by going to file menu then click save as change the name to inverter.sch
+Here we save the schematic by going to file menu then click save as change the name to inverter.sch
 - by default the local is chosen so click ok
 - xschem press insert key in the keyboard
-- 1 xschem library default library contains non pdk specific item like input output pins, power supply and test benchcomponents
-- 2
-- 3 sky water pdk
+- xschem library default library contains non pdk specific item like input output pins, power supply and test benchcomponents
+
 ##### Creating Symbol And Exporting Schematic In Xschem
+
 ![](vsdpvday1/xschem_inverter_sym.png)
-- To ceate and export schematic in xschem do the following:
+To ceate and export schematic in xschem do the following:
 - hover into the symbol and press m to move the symbol
 - press c to copy
 - press w to wireup the components
@@ -167,8 +173,11 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 ![](vsdpvday1/magic_schematic_import.png)
 - open magic again go to the file menu and import spice from the pop up window move to the xschem directory where the netlist was save then select inverter.spicethe schematic import does not know how to do the analog place and route because that is very hard to implement but what magic can do is find all the device in the netlist and create them with the same parameters and drop them on a layout. It is up to you now to put them in the best position and wire them up. move the cursor to the npin then press i in the keyboard to select the instance then move the cursor above the nfet then press m to move pfet.
 ![](vsdpvday1/magic_schematic_editparameters.png)
-- There are some parameter that will make it much more convenient to wire this thing up. These parameter don't show up in schematic entry so you can only adjust them as needed in the layout. on the pfet device select top guard ring via coverage and type 100. this will make a local interconnect to metal 1 via at the top of the guard ring for source via coverage plus 40 for drain via coverage use -40 this will split the drain contact and move 1 to the top and the other to the bottom making it easy to connect them with the horizontal metal 1 wire do the same for the nfet device for source via coverage plus 40 for drain via coverage use -40 except for bottom guard ring via coverage set to 100
+- There are some parameter that will make it much more convenient to wire this thing up. These parameter don't show up in schematic entry so you can only adjust them as needed in the layout. on the pfet device select top guard ring via coverage and type 100. this will make a local interconnect to metal 1 via at the top of the guard ring for source via coverage plus 40 for drain via coverage use -40 this will split the drain contact and move 1 to the top and the other to the bottom making it easy to connect them with the 
+horizontal metal 1 wire do the same for the nfet device for source via coverage plus 40 for drain via coverage use -40 except for bottom guard ring via coverage set to 100
+
 ##### Importing Schematic To Layout And Inverter Layout Steps
+
 ![](vsdpvday1/magic_inverter_layout.png)
 - there is one detail that's need to be taken care of which is to go to the simulation menu and click on LVS netlist top level is a circuit. This will ensure that we properly define the subcircuit for creating a layout cell with pins on the layout press the simulation menu again and check to make sure it is selected by verifying there is a check mark before LVS netlist. once it's done click on netlist again. Then you may exit from xschem.
 ![](vsdpvday1/magic_inverter_extractspice.png)
@@ -188,19 +197,51 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 to view type ```vi inverter.spice```
 
 ### Day 2
+
+##### Fundamentals of Physical Verification
+
+DRC and LVS are the two primary aspect of physical verification. The DRC make sure that the design layout meets all the silicon foundry rules for mask making. While Layout vs. Schematic (LVS) make sure the layout design electrically matches the implemented schematic form. 
+
+##### Data Formats and GDSII
+
+To describe an integrated circuit a standardize file format is needed.
+The common file formats are:
+    - Caltech Intermediate form (.cif)
+    - GDSII stream format
+    - Open Artwork System Interchange Standard (OASIS)
 ##### Lab 1 - GDS read and Input Styles
-- after running the script notice the port 1 name is no longer vpwr. it is now A which matches the subcircuit in the spice file we were looking at. so the port anotation was successful
-![](vsdpvday2cifcommands.png)
+
+Here we explore the cif styles in Magic. To view styles, we use the command `cif listall istyle`. We can also see the current style by using `cif list istyle`. The default style is sky130(vendor).
+![](vsdpvday2/cifcommands.png)
+Here we read the GDS files from the PDK using the command `gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds` in the magic console. Since it is a library, the console lists all the subcells. 
 ![](vsdpvday2/gds_read.png)
+To see the available top level cells, we can run the command `cellname top`.
 ![](vsdpvday2/cellmanager.png)
+We can also use the GUI in the menu button Options > Cell Manager. We shall load a simple and2_1 cell
 ![](vsdpvday2/load_andlayout.png)
+After running the script notice the port 1 name is no longer vpwr. it is now A which matches the subcircuit in the spice file we were looking at. so the port anotation was successful
 ![](vsdpvday2/gds_noduplicates.png)
+ Yoy can use the `gds noduplicates true` option if you do not want to automatically overwrite existing cells when reading from gds, and then read the file again. 
+
 ##### Lab 2 - Ports and Port Indexes
-![](vsdpvday2/port_index.png)
-![](vsdpvday2/port_index2.png)
-![](vsdpvday2/spicefile.png)
+
+![](vsdpvday2/port%20_index.png)
+We can select a port then use the command `port index` in the magic console if we want to inquire about ports on a layout. The caviat is we can only select one port at a time. 
+![](vsdpvday2/port%20_index2.png)
+To overcome this we use the command `port first` to find the index of the first port. Then we can then inquire about the port with the commands below.
+
+```
+port 1 name
+port 1 class
+port 1 use
+```
 ![](vsdpvday2/vi_sky130_fd_sd_hd.png)
+Here we open the spice file to view the order of ports and for us to compare the order of ports provided by the layout information.
+![](vsdpvday2/spicefile.png)
+Here we look at the and2_1 subcircuit definition by locating the library directory and opening the file labeled sky130_fd_sc_hd.spice. Here, if we search for the and2_1 cell definition, we can see the following.
+
 ##### Lab 3 - Abstract Views
+
 - abstract view has something to do with reading a lef file
 ![](vsdpvday2/lab2vid3lef.png)
 - port 3 is x which does not match the spice netlist because port order is not part of lef file meta data magic just assign port as it read the lef file
@@ -213,26 +254,43 @@ to view type ```vi inverter.spice```
 - ```gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds```
 - ```lef read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef```
 - ```readspice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice```
-- then save to save mag file
+
 ![](vsdpvday2/lab2vid3testcomparermagesult.png)
+- then save to save mag file
 ![](vsdpvday2/lab2vid3testcomparermagesult2.png)
 - then compare by
 - ```vi /usr//share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__and2_1.mag```
+- 
 ##### Lab 4 - Basic Extraction
-- compare spice generated from layout and spice from library
-- -diff -y sky130_fd_sc_hd__and2_1.spice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+
 ![](vsdpvday2/lab2vid4extract.png)
+- compare spice generated from layout and spice from library
 ![](vsdpvday2/lab2vid4comparison.png)
-##### lab 5 - Setup for DRC
+- -diff -y sky130_fd_sc_hd__and2_1.spice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
 ![](vsdpvday2/lab2vid5inverterparasitics.png)
+Here are the R and C parasitic components generated in spice using Magic.
 ![](vsdpvday2/lab2vid5inverterparasiticsinscpie.png)
 ![](vsdpvday2/lab2vid5inverter_inscpie.png)
+The commands shown are use to include extresist in the extract file and then to spice file.
 ![](vsdpvday2/lab2vid5inverter_extresist.png)
+Including the ext2resist is extremely time consuming for large circuits. For large circuits, it is better to let the router conduct this job as it already knows where all wires are supposed to connect.
+
+##### lab 5 - Setup for DRC
+
+![](vsdpvday3/lab3ex3b.png)
+The reason we haven't seen these DRC errors earlier in Magic is because the DRC script runs a full DRC check, while the default DRC style in Magic was a fast DRC. 
+
 ##### Lab 6 - Setup for LVS
+
 ![](vsdpvday2/lvs.png)
-![](vsdpvday2/xor.png)
+Here we create a subdirectory for Netgen. Next, we copy the Netgen setup and run Netgen on the and2_1 netlist files. We do this using the following commands.
+
 ##### Lab 7 - Setup for XOR
+
+![](vsdpvday2/xor.png)
+To compare a layout an xor method is use. Here I load an inverter and make a cut of the materials and save.
 ![](vsdpvday2/xorresult.png)
+I then compare the cut inverter to the original one. Here you can see the xor result. XOR operations are very useful to find such mistakes. Since, these kind of mistakes can easily occur while adjusting layouts by human intervention
 
 ### Day 3
 ##### Lab 1 For Width Rule And Spacing Rule
