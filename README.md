@@ -291,6 +291,7 @@ to view type vi inverter.spice
 
 ### Day 4
 ##### OpenLane/OpenRoad Automation
+![](openlane.png)
 ![](vsdpvday4/day4pvlab.png)
 ![](vsdpvday4/day4pvlaba.png)
 ##### OpenLane flow - non-interactive
