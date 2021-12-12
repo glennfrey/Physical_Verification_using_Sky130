@@ -83,37 +83,44 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
       - Lab - LVS with Macros
       - Lab - LVS for Digital PLL Design
 ### Day 1
+##### Check Tool Installations
+- In our first lab we learn to invoke the EDA tools primarily use in physical verification.
 ![](vsdpvday1/magic.png)
+- What you see here is the Magic EDA tool which is use for layout editing, streams out GDSII file, extracting .ext and .spice from layout, DRC checking and Antenna Checking. Magic has two window. The tkcon console where you can invoke your command and the magic layout environment. 
 - other commands on magic
 * ```magic -noconsole``` - for no console command
 * ```magic -dnull -noconsole```  = no gui
 * ```magic -dnull -noconsole test.tcl``` = run .tcl
 ![](vsdpvday1/ngspice.png)
+- Ngspice is a mixed-level/mixed-signal electronic circuit simulator.
 * ```ngspice -b```
 ![](vsdpvday1/netgen.png)
+- Netgen is a tool for comparing netlists, a process known as LVS, which stands for "Layout vs. Schematic".
 - other commands on netgen
 * ```netgen -noconsole``` - for no console command
 * ```netgen -batch source test.tcl```
 ![](vsdpvday1/xschem.png)
+- Xschem is a schematic capture program, it allows creation of hierarchical representation of circuits with a top down approach.
+* ```xschem``` 
 ![](vsdpvday1/inverter_xschem.png)
+- Here I open the inverter schematic. 
+##### Creating Sky130 Device Layout In Magic
 ![](vsdpvday1/inverter_magic_trial.png)
+- Here we try to navigate how to do layout manipulation. I am using my left and right button of my mouse to create a rectangle and then the center of my mouse to fill up a layer
 ![](vsdpvday1/magic_inverter_nmos.png)
 - in magic go to devices 1 tab click pnp change width parameters to 2um, lenth 0.5, fingers 3
 ![](vsdpvday1/magic_inverter_nmos_noguardring.png)
 - no guard, change device type
+##### Creating Simple Schematic In Xschem
 ![](vsdpvday1/xschem_inverter.png)
-- for nfet
-- note that in xschem w is fingers times width of 
-- device in this case 3 times 1.5 therefore 4.5
-- change l to .18
-- nf to 3
-- for pfet
+- for nfet note that in xschem w is fingers times width of device in this case 3 times 1.5 therefore 4.5
+- change L to .18
+- nf to 3 for pfet
 ![](vsdpvday1/xschem_inverter_iopin.png)
 - note that in xschem w is fingers times width of 
 - device in this case 3 times 1 therefore 3
 - change l to .18
 - nf to 3
-
 ![](vsdpvday1/xschem_inverter_fetdetail.png)
 -  after completing the schematic we need to implement a testbench that is separate to the schematic itself
 -  the schematic  circuit will appear as a symbol in test bench schematic
@@ -122,12 +129,14 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 -  to insert the inverter symbol press insert in the keyboard go to the current directory select inverter.sym then press ok-
 ![](vsdpvday1/xschem_inverter_sch.png)
 - save the schematic by going to file menu then click save as change the name to inverter.sch
-- bydefault the local is chosen so click ok
+- by default the local is chosen so click ok
 - xschem press insert key in the keyboard
 - 1 xschem library default library contains non pdk specific item like input output pins, power supply and test benchcomponents
 - 2
 - 3 sky water pdk
+##### Creating Symbol And Exporting Schematic In Xschem
 ![](vsdpvday1/xschem_inverter_sym.png)
+- To ceate and export schematic in xschem do the following:
 - hover into the symbol and press m to move the symbol
 - press c to copy
 - press w to wireup the components
@@ -145,7 +154,7 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 - the first thing to do is to set the voltage sources
 - change the power supply value to 1.8 since this uses love voltage transistors which is capable of 1.8v
 - for the input set the voltage sweep to a value use a piecewise linear function write as shown.
-- "PWL(0 0 20n 0 900n 1.8)"
+- ```PWL(0 0 20n 0 900n 1.8)```
 ![](vsdpvday1/xschem_inverter_testbench_ngspiceplot.png)
 - now will need 2 more statement in the ouput spice netlist. because these wont be related to any components they need to be put into textblock to appear in the output. go to the libraries and select code_shown.sym
 - the first one will tell ngspice where to find the device model for the devices that are use in the schematic. we'll use a .lib statement that select the toplevel file telling ngspice where to find all the models but also specifying the simulation corner for the models. we'll use the typical corner so the statement will be
@@ -159,23 +168,24 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
 - open magic again go to the file menu and import spice from the pop up window move to the xschem directory where the netlist was save then select inverter.spicethe schematic import does not know how to do the analog place and route because that is very hard to implement but what magic can do is find all the device in the netlist and create them with the same parameters and drop them on a layout. It is up to you now to put them in the best position and wire them up. move the cursor to the npin then press i in the keyboard to select the instance then move the cursor above the nfet then press m to move pfet.
 ![](vsdpvday1/magic_schematic_editparameters.png)
 - There are some parameter that will make it much more convenient to wire this thing up. These parameter don't show up in schematic entry so you can only adjust them as needed in the layout. on the pfet device select top guard ring via coverage and type 100. this will make a local interconnect to metal 1 via at the top of the guard ring for source via coverage plus 40 for drain via coverage use -40 this will split the drain contact and move 1 to the top and the other to the bottom making it easy to connect them with the horizontal metal 1 wire do the same for the nfet device for source via coverage plus 40 for drain via coverage use -40 except for bottom guard ring via coverage set to 100
+##### Importing Schematic To Layout And Inverter Layout Steps
 ![](vsdpvday1/magic_inverter_layout.png)
-there is one detail that's need to be taken care of which is to go to the simulation menu and click on LVS netlist top level is a circuit. This will ensure that we properly define the subcircuit for creating a layout cell with pins on the layout press the simulation menu again and check to make sure it is selected by verifying there is a check mark before LVS netlist. once it's done click on netlist again. Then you may exit from xschem.
+- there is one detail that's need to be taken care of which is to go to the simulation menu and click on LVS netlist top level is a circuit. This will ensure that we properly define the subcircuit for creating a layout cell with pins on the layout press the simulation menu again and check to make sure it is selected by verifying there is a check mark before LVS netlist. once it's done click on netlist again. Then you may exit from xschem.
 ![](vsdpvday1/magic_inverter_extractspice.png)
 - after save and overwrite do not save and exit yet on the tkcon window type
-- extract do local - make sure file is written in the local directory
-- extract all = does the extraction
+- ```extract do local``` - make sure file is written in the local directory
+- ```extract all``` = does the extraction
 - the output is in the ext format but we want spice  format
 - ext2spice lvs which sets up the netlist generator for hirarchical spice output in ngspice format with no parasitic component which is good for simulation but not for running lvs
 - ext2spice which create the spice netlist
 ![](vsdpvday1/magic_inverter_spicefile.png)
-
+##### Final DRC/LVS Checks And Post Layout Simulations
 ![](vsdpvday1/magic_inverter_netgen.png)
-- netgen -batch lvs "..mag/inverter.spice inverter" "../xschem/inverter.spice inverter"
-always use the layout netlist first then the schematic second so that you always know that on the side by side result the lest is the layout and the right is the schematic. each netlist is represented by a pair of keyword in quotes where the first is the location of the netlist file and the second is the name of the subcircuit to compare.
+- ```netgen -batch lvs "..mag/inverter.spice inverter" "../xschem/inverter.spice inverter"```
+-always use the layout netlist first then the schematic second so that you always know that on the side by side result the lest is the layout and the right is the schematic. each netlist is represented by a pair of keyword in quotes where the first is the location of the netlist file and the second is the name of the subcircuit to compare.
 ![](vsdpvday1/magic_inverter_spiceparasitics.png)
 - this adds parasitic capacitance in the spice file
-to view type vi inverter.spice
+to view type ```vi inverter.spice```
 
 ### Day 2
 ##### Lab 1 - GDS read and Input Styles
