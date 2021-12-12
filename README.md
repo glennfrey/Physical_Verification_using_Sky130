@@ -21,18 +21,79 @@ Co-founder of VLSI System Design (VSD) Corporation Private Limited
       - Creating Symbol And Exporting Schematic In Xschem
       - Importing Schematic To Layout And Inverter Layout Steps
       - Final DRC/LVS Checks And Post Layout Simulations
+ - ##### Day 2 - Design Rule Checks and Layout Vs. Simulation
+      - Fundamentals of Physical Verification
+      - Data Formats and GDSII
+      - Extraction Styles and Options in Magic
+      - GDS Reading and Writing in Magic
+      - DRC Rules in Magic
+      - LVS Setup for Netgen
+      - XOR Verification
+      - Lab - GDS read and Input Styles
+      - Lab - Ports and Port Indexes
+      - Lab - Abstract Views
+      - Lab - Basic Extraction
+      - lab - Setup for DRC
+      - Lab - Setup for LVS
+      - Lab - Setup for XOR
+ - ##### Day 3 - Design Rule Checking
+      - Fundamentals of Design Rule Checking
+      - Back-end Metal Layer Rules
+      - Local Interconnect Rules
+      - Front-end Rules
+      - Wells, Taps and Net Rules
+      - Deeps N-Well and High Voltage Rules
+      - Device Rules
+      - Miscellaneous Rules and Latch-up, Antenna and Stress Rules
+      - Density Rules
+      - Recommended, Manufacturing and ERC Rules
+      - Lab - Width and Spacing Rules
+      - Lab - Wide Spacing and Notch Rules
+      - Lab - Contact Cuts (Via) and its DRC Errors
+      - Lab - Minimum Area and Minimum Hole Rule
+      - Lab - Wells and Deep N-Wells
+      - Lab - Derived Layers
+      - Lab - Parameterised and PDK Devices
+      - Lab - Angle And Overlap Rule
+      - Lab - Unimplemented Rules
+      - Lab - Latch-up and Antenna Rules
+      - Lab - Density Rules
+ - ##### Day 4 - OpenLane Flow
+      - OpenLane/OpenRoad Automation
+      - OpenLane flow - non-interactive
+      - OpenLane flow - interactive
+      - Common DRC Errors and violations - Fixing manually
+ - ##### Day 5 - Running Layout Vs. Schematic
+      - Fundamentals of LVS
+      - Schematics and LVS Matching
+      - LVS Netlists Vs. Simulation Netlists
+      - Running Netgen
+      - Netgen Matching Algorithm
+      - Pre-Matching Analysis and Hierarchical Checking
+      - Pin and Property Checking
+      - Series/Parallel Combining
+      - Symmetry Breaking
+      - Interpreting Netgen Results
+      - Lab - Introduction to LVS
+      - Lab - LVS with Subcircuits
+      - Lab - LVS with Blackboxes Subcircuits
+      - Lab - LVS with SPICE Low Level Components
+      - Lab - LVS For Power-On-Reset Circuit
+      - Lab - Layout Vs. Verilog for Standard Cell
+      - Lab - LVS with Macros
+      - Lab - LVS for Digital PLL Design
 ### Day 1
 ![](vsdpvday1/magic.png)
 - other commands on magic
-* magic -noconsole - for no console command
-* magic -dnull -noconsole  = no gui
-* magic -dnull -noconsole test.tcl = run .tcl
+* ```magic -noconsole``` - for no console command
+* ```magic -dnull -noconsole```  = no gui
+* ```magic -dnull -noconsole test.tcl``` = run .tcl
 ![](vsdpvday1/ngspice.png)
-* ngspice -b
+* ```ngspice -b```
 ![](vsdpvday1/netgen.png)
 - other commands on netgen
-* netgen -noconsole - for no console command
-* netgen -batch source test.tcl
+* ```netgen -noconsole``` - for no console command
+* ```netgen -batch source test.tcl```
 ![](vsdpvday1/xschem.png)
 ![](vsdpvday1/inverter_xschem.png)
 ![](vsdpvday1/inverter_magic_trial.png)
@@ -115,30 +176,54 @@ always use the layout netlist first then the schematic second so that you always
 ![](vsdpvday1/magic_inverter_spiceparasitics.png)
 - this adds parasitic capacitance in the spice file
 to view type vi inverter.spice
+
 ### Day 2
+##### Lab 1 - GDS read and Input Styles
+- after running the script notice the port 1 name is no longer vpwr. it is now A which matches the subcircuit in the spice file we were looking at. so the port anotation was successful
 ![](vsdpvday2cifcommands.png)
 ![](vsdpvday2/gds_read.png)
 ![](vsdpvday2/cellmanager.png)
 ![](vsdpvday2/load_andlayout.png)
 ![](vsdpvday2/gds_noduplicates.png)
+##### Lab 2 - Ports and Port Indexes
 ![](vsdpvday2/port_index.png)
 ![](vsdpvday2/port_index2.png)
 ![](vsdpvday2/spicefile.png)
 ![](vsdpvday2/vi_sky130_fd_sd_hd.png)
+##### Lab 3 - Abstract Views
+- abstract view has something to do with reading a lef file
 ![](vsdpvday2/lab2vid3lef.png)
+- port 3 is x which does not match the spice netlist because port order is not part of lef file meta data magic just assign port as it read the lef file
 ![](vsdpvday2/lab2vid3afterread2spice_lef_annotation.png)
+- it seems that the port order can be solve by readspice command
 ![](vsdpvday2/lab2vid3test.png)
+- ```cif istyle sky130(vendor)```
+- ```gds readonly true```
+- ```gds rescale false```
+- ```gds read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds```
+- ```lef read /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef```
+- ```readspice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice```
+- then save to save mag file
 ![](vsdpvday2/lab2vid3testcomparermagesult.png)
 ![](vsdpvday2/lab2vid3testcomparermagesult2.png)
+- then compare by
+- ```vi /usr//share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/mag/sky130_fd_sc_hd__and2_1.mag```
+##### Lab 4 - Basic Extraction
+- compare spice generated from layout and spice from library
+- -diff -y sky130_fd_sc_hd__and2_1.spice /usr/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
 ![](vsdpvday2/lab2vid4extract.png)
 ![](vsdpvday2/lab2vid4comparison.png)
+##### lab 5 - Setup for DRC
 ![](vsdpvday2/lab2vid5inverterparasitics.png)
 ![](vsdpvday2/lab2vid5inverterparasiticsinscpie.png)
 ![](vsdpvday2/lab2vid5inverter_inscpie.png)
 ![](vsdpvday2/lab2vid5inverter_extresist.png)
-![](vsdpvday2/xor.png)
-![](vsdpvday2/xorresult.png)
+##### Lab 6 - Setup for LVS
 ![](vsdpvday2/lvs.png)
+![](vsdpvday2/xor.png)
+##### Lab 7 - Setup for XOR
+![](vsdpvday2/xorresult.png)
+
 ### Day 3
 ##### Lab 1 For Width Rule And Spacing Rule
 ![](vsdpvday3/lab3ex1a.png)
@@ -203,10 +288,12 @@ to view type vi inverter.spice
 ##### Lab 12 Final Exercise
 ![](vsdpvday3/lab3ex12.png)
 ![](vsdpvday3/lab3ex12a.png)
+
 ### Day 4
-##### Interactive OpenLANE Run
+##### OpenLane/OpenRoad Automation
 ![](vsdpvday4/day4pvlab.png)
 ![](vsdpvday4/day4pvlaba.png)
+##### OpenLane flow - non-interactive
 ![](vsdpvday4/day4pvlab1.png)
 ![](vsdpvday4/day4pvlab1open_yosys.png)
 ![](vsdpvday4/day4pvlab1converts_verilog_logicgates.png)
@@ -236,13 +323,9 @@ to view type vi inverter.spice
 ![](vsdpvday4/day4pvlab1runmagic_spice_export.png)
 ![](vsdpvday4/day4pvlab1run_antenna_check.png)
 ![](vsdpvday4/day4pvlab1generate_report.png)
-##### Techniques To Avoid Common DRC Error
+##### Techniques To Avoid Common DRC Error & Techniques To Manually Fix Violations
 ![](vsdpvday4/day4pvlab1task1.png)
-##### Techniques To Manually Fix Violations
-![](vsdpvday4/lab.png)
-![](vsdpvday4/lab.png)
-![](vsdpvday4/lab.png)
-![](vsdpvday4/lab.png)
+
 ### Day 5
 ##### Lab 1 Simple LVS Experiment
 ![](vsdpvday5/lab5ex1.png)
