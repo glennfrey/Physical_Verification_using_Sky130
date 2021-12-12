@@ -474,8 +474,7 @@ Electrical Rule Checks (ERC) are checks for a layout that is DRC correct but cau
 ### Day 4
 ##### OpenLane/OpenRoad Automation
 ![](openlane.png)
-- OpenLane flow is an RTL2GDS tool that uses several tool from synthesis, floorplan, placement, clock tree synthesis, routing, GDS generation to checkng. Below are the process flow and corresponding tools.
-##### Synthesis
+OpenLane flow is an RTL2GDS tool that uses several tool from synthesis, floorplan, placement, clock tree synthesis, routing, GDS generation to checkng. Below are the process flow and corresponding tools.
 ##### Synthesis
 - yosys - Performs RTL synthesis
 - abc - Performs technology mapping
