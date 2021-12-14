@@ -764,12 +764,18 @@ Netgen also offers a second output format in JSON which works in a simple GUI wr
 
 ##### Lab 1 Simple LVS Experiment
 ![](vsdpvday5/lab5ex1.png)
+Here we download the necessary files using git. As for this exercise we are given a spice file that has the same content notice the diff result and the content of spice that is dump in the console. After running netgen the result said circuits match uniquely as expected.
 ![](vsdpvday5/lab5ex1a.png)
+You can open the result in the comp.out as shown.
 ![](vsdpvday5/lab5ex1b.png)
+Here we change one of spice A subcell to B. As expected the result does not match.
 ![](vsdpvday5/lab5ex1c.png)
+You can open the result in the comp.out as shown.
 ##### Lab 2 LVS With Subcircuits
 ![](vsdpvday5/lab5ex2.png)
+In this exercise we have similar files to the first exercise, but this time they are using subcircuits instead. We also have the result at the right if we run LVS. Notice the result saying not check. This is because we have provided subcircuit definitions, not subcircuit calls, which are not active components. Which means the subcircuits are defined but not instantiated. Netgen can match these, but will inform you that the files are empty or with no instantiated devices. If we run these files in a simulator like Ngspice, we would not face the error. This is because it would not read the cells inside the definition and would consider both files empty.
 ![](vsdpvday5/lab5ex2a.png)
+
 ![](vsdpvday5/lab5ex2b.png)
 ![](vsdpvday5/lab5ex2c.png)
 ![](vsdpvday5/lab5ex2d.png)
