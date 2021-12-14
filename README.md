@@ -902,12 +902,20 @@ Other submodules do not need this, so we can directly do the changes in the top 
 Now, when we run LVS again, we find a match.
 ##### Lab 8 LVS Digital PLL
 ![](vsdpvday5/lab5ex8.png)
+Let us open the layout in Magic and extract the netlist.
 ![](vsdpvday5/lab5ex8a.png)
+Next, we can run LVS. The result shows that errors are present mainly in the top level modules. This is true because the design here uses standard cells for subcircuits.
 ![](vsdpvday5/lab5ex8b.png)
 ![](vsdpvday5/lab5ex8c.png)
+As we can see, device mismatches are present in the top level. Because of the device mismatches, the list of net mismatches will be a mess to interpret. So let's deal with the devices first. The comp.out file shows there is a decap mismatch, diode mismatch and also tap/fill mismatches like the ones seen earlier. This last one has an easy fix, so let us update the environment variable in the netgen shell script as follows and run netgen again.
+Now run Netgen on both netlists. If we check the comp.out file, we see that the fill/tap mismatches disappeared. However, there is sill an unmatched diode_2 element in the layout netlist that isn't present in the verilog file.
 ![](vsdpvday5/lab5ex8d.png)
+We can see that the diode device connects to the dco node. This is important as we need to make the appropriate connections in the verilog file as well.
+for the verilog file, we must locate where dco nets are listed. Once we find them, we can add the missing device with the correct connection as follows.
 ![](vsdpvday5/lab5ex8e.png)
+
 ![](vsdpvday5/lab5ex8f.png)
+Now that we have added it into the verilog as well, we can run LVS again on the files and should find that the diode mismatch disappears.
 ![](vsdpvday5/lab5ex8g.png)
 ![](vsdpvday5/lab5ex8h.png)
 ![](vsdpvday5/lab5ex8i.png)
