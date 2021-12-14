@@ -953,12 +953,12 @@ After running LVS we only have one property error left. After editing the parame
 Looking at the report generated in the LVS we see the technology file nfet name. We correct this by opening the magic once again and open the nfet mag file.
 I then open the params tab as shown.
 ![](vsdpvday5/lab5ex9f.png)
-Finally after running LVS the reported error is 0! 
+Finally after correction and running LVS the reported error is 0! 
 
 ### Acknowledgement
 - R. Timothy Edwards
 - Kunal Ghosh
-- - VSD-IAT
+- VSD-IAT
 
 
 
