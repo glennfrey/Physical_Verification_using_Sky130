@@ -885,10 +885,21 @@ Here we see that fill and tap cells can be ignored. We can assume that a good pl
 Now, if we pass the files to Netgen using the shell script, we get unique matching.
 ##### Lab 7 LVS For Macros
 ![](vsdpvday5/lab5ex7.png)
+The following exercise has macros involved, which are smaller synthesized digital blocks inside the top level digital block. If we take a look at the top level verilog code file, we find that the code looks like a gate level verilog netlist with all subcells instantiated already in the file.
+Let us look at the layout for the same in Magic, and then extract the layout netlist.
 ![](vsdpvday5/lab5ex7a.png)
+Once we have this, we can run a layout vs. verilog on the netlists using the run_lvs shell script as follows.
+The LVS does not really complete at all, and there are a whole lot of error messages. Netgen tells us that the module mgmt_protect is not structural (gate level) verilog, and thus treated as a blackbox. If we explore the verilog file for the same, we find that at line 242 there is one instance with a ~ operator in front of the signal name. This means that the line here is written in behavioral verilog and cannot be directly compared with a spice netlist.
 ![](vsdpvday5/lab5ex7b.png)
+The rectified gate level verilog file for this design can be found under the verilog/gl subdirectory, so let's edit the run_lvs shell script to match this.
 ![](vsdpvday5/lab5ex7c.png)
+Now when we run LVS, we get the following results.
 ![](vsdpvday5/lab5ex7d.png)
+From the comp.out file, it is clear that there are missing gnd pins (vssd1, vssd2, vssa1 and vssa2) in the layout netlist. Let's open the layout in Magic and search for the missing nets. While these pins do exist, we discover that as far as Magic is concerned, they are merged with other gnd pins. This behaviour is common to layout tools when representing substrates for substrate connectivity. To fix this, there is a layer in Magic called isosub that isolates substrate layers, though currently, Magic cannot isolate multiple substrate layers at one time. This is a feature that is still in development.
+Instead, to get an LVS match, we can try to merge all GND connections in the verilog to one net. This should be fine, since the ground pins on a chip will eventually all be connected together anyway. This way, if Magic cannot separate the gnd nets, we will ensure that they cannot be separated in the verilog either.
+First, we look at the mgmt_protect_hv submodules inside the gl directory, and add the following commands at the end of the file to merge the gnd nets.
+Other submodules do not need this, so we can directly do the changes in the top level module next. We also have to assign the other 2 isolated domains in this module.
+Now, when we run LVS again, we find a match.
 ##### Lab 8 LVS Digital PLL
 ![](vsdpvday5/lab5ex8.png)
 ![](vsdpvday5/lab5ex8a.png)
