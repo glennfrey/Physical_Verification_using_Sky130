@@ -867,13 +867,22 @@ We can see that this pin is connected to vdd3v3 on one of the example_por subcel
 Now the number of devices are the same.
 ##### Lab 6 LVS Layout Vs Verilog For Standard Cell
 ![](vsdpvday5/lab5ex6.png)
+In this exercise, we will look at running layout vs. verilog. We shall use a standard cell design from the efabless caravel chip. This example uses an OpenLane design, so LVS was already conducted on it as part of the design process by OpenLane.
+Let us run Magic to view the file in this exercise. We find a digital PLL design. Let us extract the layout file into netlist as follows.
 ![](vsdpvday5/lab5ex6a.png)
+Since the netlist being compared here is a verilog code, and no schematic capture exists, we can't view a schematic in Xschem. The process here is to directly compare the layout netlist with the verilog. Below is the verilog code for the same. Now, we can conduct layout vs. verilog using the run_lvs shell script provided. This gives the following results. If we take a look at the comp.out file, we see that the tap, fill1 and fill2 nets are missing in the layout.
 ![](vsdpvday5/lab5ex6b.png)
+This can be confirmed by checking the verilog file for fill nets. As we can see, there are fill layers such as FILLER_0_11 present in the verilog. Let us search for these in the layout netlist. We find that there are fill layers, but only under other decap cells. Let us open Magic and search for the FILLER_0_11 layer directly here in the layout.
 ![](vsdpvday5/lab5ex6c.png)
+We can see that the goto command does indeed find it. 
 ![](vsdpvday5/lab5ex6d.png)
+If we expand into this cell however, we see the cell exists, but no relevant devices such as resistors, transistors, etc. appear in it. It is simply a cell with 4 pins on a diff layer. Because of it being "empty", Magic's extraction optimises this cell completely out of the final spice netlist. To fix this, we must explore a method used by OpenLane.
 ![](vsdpvday5/lab5ex6e.png)
+If we open the Netgen setup.tcl file and look for the word "fill", we see the following rule. 
 ![](vsdpvday5/lab5ex6f.png)
+Here we see that fill and tap cells can be ignored. We can assume that a good place and route tool will never be able to place these fill cells in such a way to mess up design. So in this case, it is okay to ignore this error; though the code for this also depends on the MAGIC_EXT_USE_GDS environment variable. This means that this environment variable must be set before Netgen runs for it to be able to ignore these fill errors. Let us edit the run_lvs shell to add the environment variable as follows.
 ![](vsdpvday5/lab5ex6g.png)
+Now, if we pass the files to Netgen using the shell script, we get unique matching.
 ##### Lab 7 LVS For Macros
 ![](vsdpvday5/lab5ex7.png)
 ![](vsdpvday5/lab5ex7a.png)
