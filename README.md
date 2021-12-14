@@ -773,26 +773,42 @@ Here we change one of spice A subcell to B. As expected the result does not matc
 You can open the result in the comp.out as shown.
 ##### Lab 2 LVS With Subcircuits
 ![](vsdpvday5/lab5ex2.png)
-In this exercise we have similar files to the first exercise, but this time they are using subcircuits instead. We also have the result at the right if we run LVS. Notice the result saying not check. This is because we have provided subcircuit definitions, not subcircuit calls, which are not active components. Which means the subcircuits are defined but not instantiated. Netgen can match these, but will inform you that the files are empty or with no instantiated devices. If we run these files in a simulator like Ngspice, we would not face the error. This is because it would not read the cells inside the definition and would consider both files empty.
+In this exercise we have similar files to the first exercise, but this time they are using subcircuits instead. We also have the result at the right if we run LVS. Notice the result saying not check. This is because we have provided subcircuit definitions, not subcircuit calls, which are not active components. Which means the subcircuits are defined but not instantiated. Netgen can match these, but will inform you that the files are empty or with no instantiated devices. If we run these files in a simulator like Ngspice, we would not face the error. This is because it would not read the cells inside the definition and would consider both files empty. Netgen only match at the top level, but we can tell it to compare at a subcircuit level. This is useful when we only want to match 2 specific subcircuits in the netlists, or compare subcircuits in a testbench file. We can do this by specifying subcircuit by typing ```lvs "netA.spice  test" "netB.spice test"``` in the tkcon console.
 ![](vsdpvday5/lab5ex2a.png)
-
+Here I edit netA.spice and change the order of pins from subcircuit A B C to subcircuit C B A then I run lvs. Notice the result still a match. This only show that the netgen does not care of the pin order as long as the pin names are the same and the connectivity is the same.
 ![](vsdpvday5/lab5ex2b.png)
+Now if we swap the pin A in cell 3 of spice A to pin C the connectivity will no longer be the same. Running lvs the result shows cell failed matching.
 ![](vsdpvday5/lab5ex2c.png)
+If we open comp.out we can see a mismatch.
 ![](vsdpvday5/lab5ex2d.png)
-![](vsdpvday5/lab5ex2e.png)
+running lvs can be lengthy as shown. Here we add to the commands where the technology file is, the name of the output, and to log data in json.
+![](vsdpvday5/lab5ex2e.png) 
+we can then run the json file in the console with the command shown.
 ##### Lab 3 LVS With Blackboxes Subcircuits
 ![](vsdpvday5/lab5ex3.png)
+running lvs command can be lengthy so in this use a run_lvs shell script for the remaining exercises that allows us to run LVS automatically. In this exercise we have the following netlist. 
 ![](vsdpvday5/lab5ex3a.png)
+If we run Netgen we will get the following result. Notice it says circuits match uniquely. The disconnected pins message states that Netgen is treating them as empty subcircuits and not black box entries.
 ![](vsdpvday5/lab5ex3b.png)
+Looking at the comp file, we also get disconnected pin entries in the results.
 ![](vsdpvday5/lab5ex3c.png)
+Netgen does not care about cell order but care about pin names in black box entries that is why we get a mismatch.
 ![](vsdpvday5/lab5ex3d.png)
+Netgen treat the pin names as meaningful, as can be seen in the comp.out file.
 ![](vsdpvday5/lab5ex3e.png)
+result mismatch.
 ![](vsdpvday5/lab5ex3f.png)
+Now let us edit the spice A once again as shown.
 ![](vsdpvday5/lab5ex3g.png)
+The comp file shows that D and C were missing in the 2 file respectively, and netgen creates proxy pins for the same. Metgen can only depend on pin names to compare these circuits since these are black box entries,  and cannot make assumptions about anything else.
 ![](vsdpvday5/lab5ex3i.png)
+running the lvs we get a mismatch.
 ![](vsdpvday5/lab5ex3j.png)
+Finally, let us edit the spice A file again.
 ![](vsdpvday5/lab5ex3k.png)
+The LVS result shows a good match. The comp file shows that the cells were flattened.
 ![](vsdpvday5/lab5ex3l.png)
+It is hard for netgen to determine what is a black box entry and what is simply an empty definition. To specify black box entries, we use the -blackbox option to tell netgen that cells with no contents should be treated as black boxes. With this option enabled, we see that the comp file results state that there are mismatches, but netgen believes cell4 and cell1 in files A and B respectively are so similar that they end up in the same partition.
 ##### Lab 4 LVS With SPICE Low Level Components
 ![](vsdpvday5/lab5ex4.png)
 ##### Lab 5 LVS For Small Analog Block - Power-On Reset
