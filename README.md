@@ -940,12 +940,25 @@ After successful connection. We run ext2spice to extract the netlist as shown.
 Finally after running the lvs the error is now zero.
 ##### Lab 9 LVS With Property Errors
 ![](vsdpvday5/lab5ex9.png)
+This is the last lab of the webinar. Here I generated a netlist from the layout.
 ![](vsdpvday5/lab5ex9a.png)
+I also generated a netlist in xschem.
 ![](vsdpvday5/lab5ex9b.png)
+After running LVS a property error occur. Looking into the spice generated we also see property error. 
 ![](vsdpvday5/lab5ex9c.png)
+To get rid of this we edit the properties in the xschem as shown. Here wrong parameters in the devices causes property error. After correnction generate netlist once again.
 ![](vsdpvday5/lab5ex9d.png)
+After running LVS we only have one property error left. After editing the parameters of the devices in schematics using xschem we are sure that the property error is coming from the layout.  
 ![](vsdpvday5/lab5ex9e.png)
+Looking at the report generated in the LVS we see the technology file nfet name. We correct this by opening the magic once again and open the nfet mag file.
+I then open the params tab as shown.
 ![](vsdpvday5/lab5ex9f.png)
+Finally after running LVS the reported error is 0! 
+
+### Acknowledgement
+- R. Timothy Edwards
+- Kunal Ghosh
+- - VSD-IAT
 
 
 
