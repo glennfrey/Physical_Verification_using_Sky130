@@ -834,27 +834,37 @@ Next, we must create the layout schematic. We run magic using the script and loa
 ![](vsdpvday5/lab5ex5e.png)
 Now we run the extraction command as follows.
 ![](vsdpvday5/lab5ex5f.png)
-
 ![](vsdpvday5/lab5ex5g.png)
 Now we step into the netgen directory and run the shell script run_lvs_wrapper.sh to compare the 2 top level cells.
 We get errors in the LVS output, so we can look at the comp file to know more.
-![](vsdpvday5/lab5ex5h.png)Since the standard cells are not included in the netlist, they are treated as blackboxes, and without subcircuit definitions they are just numbered 1 to 6. Layout netlist has the full pin names. While netgen does treat them as blackboxes so pin matching errors do not immediately show up in the final count, and netgen instead uses proxy pins.
+![](vsdpvday5/lab5ex5h.png)
+Since the standard cells are not included in the netlist, they are treated as blackboxes, and without subcircuit definitions they are just numbered 1 to 6. Layout netlist has the full pin names. While netgen does treat them as blackboxes so pin matching errors do not immediately show up in the final count, and netgen instead uses proxy pins.
 ![](vsdpvday5/lab5ex5i.png)
+To fix this, we can provide xschem with subcircuit definitions by using the testbench file instead for the netlist as it contains references to the library. We do not need to select the top level is a subckt option here as the top level i the testbench code anyway.
 ![](vsdpvday5/lab5ex5j.png)
+Now, we must edit the LVS launch script to read this file instead. 
 ![](vsdpvday5/lab5ex5k.png)
+Press the netlist button once again to generate netlist.
 ![](vsdpvday5/lab5ex5l.png)
+If we run LVS on this, we now see that the net errors have been fixed but we have a lot of unmatched pins.
 ![](vsdpvday5/lab5ex5m.png)
+Now, let us go back to the wrapper comp file and check the pin errors.
 ![](vsdpvday5/lab5ex5n.png)
 ![](vsdpvday5/lab5ex5o.png)
 ![](vsdpvday5/lab5ex5p.png)
 ![](vsdpvday5/lab5ex5q.png)
+Here, there is one pin mismatch at the start of the list, followed by a few mismatches at the end. Let us fix the first mismatch. In this case io_analog[4] is mismatched in the schematic, so lets open Xschem and search for it.
 ![](vsdpvday5/lab5ex5r.png)
 ![](vsdpvday5/lab5ex5s.png)
+Now if we trace this node out to the pins, we see that this is connected to io_clamp_high[0]. Instead, we should separate these node using a metal wire resistor.
 ![](vsdpvday5/lab5ex5st.png)
 ![](vsdpvday5/lab5ex5u.png)
 ![](vsdpvday5/lab5ex5v.png)
+Now magic will consider them as separate nodes. We must keep note of the width of the resistor in the direction of current flow, which is 11 microns and a height of 1.5 microns. Next, we extract the netlist and run LVS again.
 ![](vsdpvday5/lab5ex5w.png)
+We can see that this pin is connected to vdd3v3 on one of the example_por subcells. Let us find this in the layout with magic. We look for the vdd3v3 connection and find the node it is attached to.
 ![](vsdpvday5/lab5ex5y.png)
+Now the number of devices are the same.
 ##### Lab 6 LVS Layout Vs Verilog For Standard Cell
 ![](vsdpvday5/lab5ex6.png)
 ![](vsdpvday5/lab5ex6a.png)
