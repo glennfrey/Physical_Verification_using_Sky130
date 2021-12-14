@@ -913,20 +913,31 @@ Now run Netgen on both netlists. If we check the comp.out file, we see that the 
 We can see that the diode device connects to the dco node. This is important as we need to make the appropriate connections in the verilog file as well.
 for the verilog file, we must locate where dco nets are listed. Once we find them, we can add the missing device with the correct connection as follows.
 ![](vsdpvday5/lab5ex8e.png)
-
+We can trace the connected path as shown.
 ![](vsdpvday5/lab5ex8f.png)
 Now that we have added it into the verilog as well, we can run LVS again on the files and should find that the diode mismatch disappears.
 ![](vsdpvday5/lab5ex8g.png)
+select the 249 cell and look for the ground pin.
 ![](vsdpvday5/lab5ex8h.png)
+selecting three times we can trace the path once again as highlighted
 ![](vsdpvday5/lab5ex8i.png)
+Looking closer to the power rails. It seems that the pin is not connected to the ground and left hanging. We correct the open circuit by creating connection between the metal 1 and the ground rail.
 ![](vsdpvday5/lab5ex8j.png)
+Here we extract the spice from the layout. before we exit there is one more thing that is shorted the clock of cell 328. To correct this I cut the connection
 ![](vsdpvday5/lab5ex8k.png)
+Manipulating the layout and connecting the cell take skills and practide. It took me awhile to find the connections of each. And connecting them is equally as hard as you have to make sure there is no DRC error generated.
 ![](vsdpvday5/lab5ex8l.png)
+Here I highlighted a part of the cell to keep track of it.
 ![](vsdpvday5/lab5ex8m.png)
+Here the connection is cut successfully.
 ![](vsdpvday5/lab5ex8n.png)
+We then generate the netlist once again.
 ![](vsdpvday5/lab5ex8o.png)
+The last problem is the ext_trim(22) has no connection to 192_A2. 
 ![](vsdpvday5/lab5ex8p.png)
+After successful connection. We run ext2spice to extract the netlist as shown.
 ![](vsdpvday5/lab5ex8q.png)
+Finally after running the lvs the error is now zero.
 ##### Lab 9 LVS With Property Errors
 ![](vsdpvday5/lab5ex9.png)
 ![](vsdpvday5/lab5ex9a.png)
