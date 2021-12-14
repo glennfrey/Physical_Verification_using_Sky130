@@ -811,16 +811,34 @@ The LVS result shows a good match. The comp file shows that the cells were flatt
 It is hard for netgen to determine what is a black box entry and what is simply an empty definition. To specify black box entries, we use the -blackbox option to tell netgen that cells with no contents should be treated as black boxes. With this option enabled, we see that the comp file results state that there are mismatches, but netgen believes cell4 and cell1 in files A and B respectively are so similar that they end up in the same partition.
 ##### Lab 4 LVS With SPICE Low Level Components
 ![](vsdpvday5/lab5ex4.png)
+In exercise 4 we are given a netlist that shown above. The netlists have resistors, diode and capacitors. Running LVS, we get no errors. We shall edit spice A as follows. Since the resistors are permutable, changing the order of pins should not make a difference to the result. However netgen still cares about pin names in the top level. Since the resistors are permutable, changing the order of pins should not make a difference to the result. However netgen still cares about pin names in the top level. We must also add the following lines to the setup file.
+```
+permute "-circuit1 cell1" A C
+permute "-circuit2 cell1" A C
+```
+Now, if we run LVS we see that there are errors and this is because of the fact the the resistors are permutable already, netgen gets tripped up.
+If we run an LVS on this and check the comp file, we see that although netgen noted the difference in pin names, it was able to match them successfully.
 ##### Lab 5 LVS For Small Analog Block - Power-On Reset
 ![](vsdpvday5/lab5ex5.png)
+Let us look at a standard analog design project. This exercise contains both design schematic and layout files for xschem and magic respectively. We will be looking at a project that has 2 power-on-reset circuits, that output a digital signal when the supply voltage hits a certain level and stability, notifying the rest of the circuit that the power supply is good.
+Let us generate the schematic netlist first. Open xschem as follows.
 ![](vsdpvday5/lab5ex5a.png)
+Let us generate the netlist with the Netlist button. 
 ![](vsdpvday5/lab5ex5b.png)
+We can generate spice by clicking netlist on the upper right corner. You will notice a change in color of texts as indication of successful generation.
 ![](vsdpvday5/lab5ex5c.png)
+If we look at the spice file, we see that a top level subcircuit was commented out.
+To fix this, we open xschem again and click the menu button Simulation > LVS netlist: Top level is a .subckt and then generate the netlist again. This is shown below.
 ![](vsdpvday5/lab5ex5d.png)
+Next, we must create the layout schematic. We run magic using the script and load the file user_analog_project_wrapper.mag.
 ![](vsdpvday5/lab5ex5e.png)
+Now we run the extraction command as follows.
 ![](vsdpvday5/lab5ex5f.png)
+
 ![](vsdpvday5/lab5ex5g.png)
-![](vsdpvday5/lab5ex5h.png)
+Now we step into the netgen directory and run the shell script run_lvs_wrapper.sh to compare the 2 top level cells.
+We get errors in the LVS output, so we can look at the comp file to know more.
+![](vsdpvday5/lab5ex5h.png)Since the standard cells are not included in the netlist, they are treated as blackboxes, and without subcircuit definitions they are just numbered 1 to 6. Layout netlist has the full pin names. While netgen does treat them as blackboxes so pin matching errors do not immediately show up in the final count, and netgen instead uses proxy pins.
 ![](vsdpvday5/lab5ex5i.png)
 ![](vsdpvday5/lab5ex5j.png)
 ![](vsdpvday5/lab5ex5k.png)
